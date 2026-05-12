@@ -323,7 +323,7 @@ fn get_androws_adb_path() -> Option<String> {
     /// Open a registry subkey under HKLM with KEY_READ access.
     unsafe fn open_hklm_key(subkey: &str) -> Option<HKEY> {
         let subkey_wide: Vec<u16> = subkey.encode_utf16().chain(std::iter::once(0)).collect();
-        let mut hkey: HKEY = 0;
+        let mut hkey: HKEY = std::ptr::null_mut();
         let rc = unsafe {
             RegOpenKeyExW(
                 HKEY_LOCAL_MACHINE,
